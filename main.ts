@@ -51,7 +51,6 @@ namespace CBurgXGo {
     })
 
     export enum Position {
-        Position0,
         //% block="position 1"
         //% block.loc.nl="positie 1"
         Position1,
@@ -114,7 +113,7 @@ namespace CBurgXGo {
     //% block="follow the leader at %pos"
     //% block.loc.nl="volg de leider op %pos"
     export function doClient(pos: Position) {
-        CLIENT = pos
+        CLIENT = pos + 1
         basic.showNumber(pos)
         while (true);
     }

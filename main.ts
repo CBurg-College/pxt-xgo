@@ -3,8 +3,14 @@
 namespace CBurgXGo {
 
     let MASTER: boolean = false
+    let CLIENT: number = 0
+    let WAIT: number = 0
 
     enum Message {
+        Start,
+        FastWave,
+        NormalWave,
+        SlowWave,
         Stand,
         Prone,
         Sit,
@@ -23,7 +29,13 @@ namespace CBurgXGo {
     radio.setGroup(1)
 
     radio.onReceivedNumber(function (receivedNumber: number) {
+        if (WAIT) basic.pause(WAIT)
+        WAIT = 0
         switch (receivedNumber) {
+            case Message.Start: basic.clearScreen(); break;
+            case Message.FastWave: WAIT = CLIENT * 0.2; break;
+            case Message.NormalWave: WAIT = CLIENT * 0.6; break;
+            case Message.SlowWave: WAIT = CLIENT * 0.8; break;
             case Message.Stand: defaultPosture(); break;
             case Message.Prone: goProne(); break;
             case Message.Sit: sitDown(); break;
@@ -37,6 +49,37 @@ namespace CBurgXGo {
             case Message.Squat: perform(Movement.Squat); break;
         }
     })
+
+    export enum Position {
+        Position0,
+        //% block="position 1"
+        //% block.loc.nl="positie 1"
+        Position1,
+        //% block="position 2"
+        //% block.loc.nl="positie 2"
+        Position2,
+        //% block="position 3"
+        //% block.loc.nl="positie 3"
+        Position3,
+        //% block="position 4"
+        //% block.loc.nl="positie 4"
+        Position4,
+        //% block="position 5"
+        //% block.loc.nl="positie 5"
+        Position5,
+        //% block="position 6"
+        //% block.loc.nl="positie 6"
+        Position6,
+        //% block="position 7"
+        //% block.loc.nl="positie 7"
+        Position7,
+        //% block="position 8"
+        //% block.loc.nl="positie 8"
+        Position8,
+        //% block="position 9"
+        //% block.loc.nl="positie 9"
+        Position9,
+    }
 
     export enum Movement {
         //% block="swing"
@@ -68,15 +111,11 @@ namespace CBurgXGo {
         basic.pause(time * 1000);
     }
 
-    //% block="wait for button A being pressed"
-    //% block.loc.nl="wacht tot knop A wordt ingedrukt"
-    export function waitButton() {
-        while (!input.buttonIsPressed(Button.A));
-    }
-
-    //% block="follow the leader"
-    //% block.loc.nl="volg de leider"
-    export function doClient() {
+    //% block="follow the leader at %pos"
+    //% block.loc.nl="volg de leider op %pos"
+    export function doClient(pos: Position) {
+        CLIENT = pos
+        basic.showNumber(pos)
         while (true);
     }
 
@@ -84,6 +123,10 @@ namespace CBurgXGo {
     //% block.loc.nl="wees de leider"
     export function setMaster() {
         MASTER = true
+        basic.showString("Druk op A")
+        while (!input.buttonIsPressed(Button.A));
+        radio.sendNumber(Message.Start)
+        basic.clearScreen()
     }
 
     //% block="perform the %movement"

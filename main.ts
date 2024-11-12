@@ -69,7 +69,7 @@ namespace CBurgXGo {
     }
 
     //% block="wait for button A being pressed"
-    //% block.loc.nl="wacht tot knop A is ingedrukt"
+    //% block.loc.nl="wacht tot knop A wordt ingedrukt"
     export function waitButton() {
         while (!input.buttonIsPressed(Button.A));
     }
@@ -77,6 +77,7 @@ namespace CBurgXGo {
     //% block="follow the leader"
     //% block.loc.nl="volg de leider"
     export function doClient() {
+        while (true);
     }
 
     //% block="be the leader"

@@ -135,9 +135,8 @@ namespace CBurgXGo {
     //% block.loc.nl="wees de leider"
     export function setMaster() {
         MASTER = true
-        while (!input.buttonIsPressed(Button.A)) {
-            basic.showString(">> A")
-        }
+        basic.showString("A")
+        while (!input.buttonIsPressed(Button.A));
         radio.sendNumber(Message.Start)
         basic.clearScreen()
     }

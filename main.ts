@@ -77,7 +77,20 @@ namespace CBurgXGo {
         Position8,
         //% block="position 9"
         //% block.loc.nl="positie 9"
-        Position9,
+        Position9
+    }
+
+    export enum Wave {
+
+        //% block="slow"
+        //% block.loc.nl="langzame"
+        Slow,
+        //% block="normal"
+        //% block.loc.nl="gewone"
+        Normal,
+        //% block="fast"
+        //% block.loc.nl="snelle"
+        Fast
     }
 
     export enum Movement {
@@ -127,6 +140,22 @@ namespace CBurgXGo {
         }
         radio.sendNumber(Message.Start)
         basic.clearScreen()
+    }
+
+    //% block="do a %wave wave"
+    //% block.loc.nl="maak een %wave wave"
+    export function setWave(wave: Wave) {
+        switch (wave) {
+            case Wave.Slow:
+                if (MASTER) radio.sendNumber(Message.SlowWave)
+                break;
+            case Wave.Normal:
+                if (MASTER) radio.sendNumber(Message.NormalWave)
+                break;
+            case Wave.Fast:
+                if (MASTER) radio.sendNumber(Message.FastWave)
+                break;
+        }
     }
 
     //% block="perform the %movement"

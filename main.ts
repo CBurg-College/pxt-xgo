@@ -68,6 +68,12 @@ namespace CBurgXGo {
         basic.pause(time * 1000);
     }
 
+    //% block="wait for button A being pressed"
+    //% block.loc.nl="wacht tot knop A is ingedrukt"
+    export function waitButton() {
+        while (!input.buttonIsPressed(Button.A));
+    }
+
     //% block="follow the leader"
     //% block.loc.nl="volg de leider"
     export function doClient() {

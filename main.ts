@@ -114,7 +114,7 @@ namespace CBurgXGo {
     //% block.loc.nl="volg de leider op %pos"
     export function doClient(pos: Position) {
         CLIENT = pos + 1
-        basic.showNumber(pos)
+        basic.showNumber(CLIENT)
         while (true);
     }
 
@@ -122,8 +122,9 @@ namespace CBurgXGo {
     //% block.loc.nl="wees de leider"
     export function setMaster() {
         MASTER = true
-        basic.showString("Druk op A")
-        while (!input.buttonIsPressed(Button.A));
+        while (!input.buttonIsPressed(Button.A)) {
+            basic.showString(">> A")
+        }
         radio.sendNumber(Message.Start)
         basic.clearScreen()
     }

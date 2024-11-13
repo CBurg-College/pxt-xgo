@@ -2,6 +2,7 @@
 //% block="XGo Robot hond"
 namespace CBurgXGo {
 
+    let GROUP: number = 1
     let MASTER: boolean = false
     let CLIENT: number = 0
     let WAIT: number = 0
@@ -26,8 +27,6 @@ namespace CBurgXGo {
 
     xgo.init_xgo_serial(SerialPin.P2, SerialPin.P1)
 
-    radio.setGroup(1)
-
     radio.onReceivedNumber(function (receivedNumber: number) {
         if (WAIT) basic.pause(WAIT)
         WAIT = 0
@@ -49,6 +48,36 @@ namespace CBurgXGo {
             case Message.Squat: perform(Movement.Squat); break;
         }
     })
+
+    export enum Group {
+        //% block="group 1"
+        //% block.loc.nl="groep 1"
+        Group1,
+        //% block="group 2"
+        //% block.loc.nl="groep 2"
+        Group2,
+        //% block="group 3"
+        //% block.loc.nl="groep 3"
+        Group3,
+        //% block="group 4"
+        //% block.loc.nl="groep 4"
+        Group4,
+        //% block="group 5"
+        //% block.loc.nl="groep 5"
+        Group5,
+        //% block="group 6"
+        //% block.loc.nl="groep 6"
+        Group6,
+        //% block="group 7"
+        //% block.loc.nl="groep 7"
+        Group7,
+        //% block="group 8"
+        //% block.loc.nl="groep 8"
+        Group8,
+        //% block="group 9"
+        //% block.loc.nl="groep 9"
+        Group9
+    }
 
     export enum Position {
         //% block="position 1"
@@ -123,9 +152,16 @@ namespace CBurgXGo {
         basic.pause(time * 1000);
     }
 
+    //% block="join %group"
+    //% block.loc.nl="sluit aan bij %group"
+    export function setGroup(group: Group) {
+        GROUP = group + 1
+    }
+
     //% block="follow the leader at %pos"
     //% block.loc.nl="volg de leider op %pos"
     export function doClient(pos: Position) {
+        radio.setGroup(GROUP)
         CLIENT = pos + 1
         basic.showNumber(CLIENT)
     }
@@ -133,11 +169,12 @@ namespace CBurgXGo {
     //% block="be the leader"
     //% block.loc.nl="wees de leider"
     export function setMaster() {
+        radio.setGroup(GROUP)
         MASTER = true
         basic.showString("A")
         while (!input.buttonIsPressed(Button.A));
-        radio.sendNumber(Message.Start)
         basic.clearScreen()
+        radio.sendNumber(Message.Start)
     }
 
     //% block="do a %wave wave"

@@ -128,7 +128,6 @@ namespace CBurgXGo {
     export function doClient(pos: Position) {
         CLIENT = pos + 1
         basic.showNumber(CLIENT)
-        while (true);
     }
 
     //% block="be the leader"

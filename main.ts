@@ -172,7 +172,7 @@ namespace CBurgXGo {
         radio.setGroup(GROUP)
         MASTER = true
         basic.showString("A")
-        while (!input.buttonIsPressed(Button.A));
+        while (!input.buttonIsPressed(Button.AB));
         basic.clearScreen()
         radio.sendNumber(Message.Start)
     }

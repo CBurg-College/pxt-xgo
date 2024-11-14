@@ -25,7 +25,7 @@ namespace CBurgXGo {
         Squat
     }
 
-    xgo.init_xgo_serial(SerialPin.P2, SerialPin.P1)
+    xgo.init_xgo_serial(SerialPin.P14, SerialPin.P13)
 
     radio.onReceivedNumber(function (receivedNumber: number) {
         if (WAIT) basic.pause(WAIT)

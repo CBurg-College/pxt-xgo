@@ -28,7 +28,6 @@ namespace CBurgXGo {
     xgo.init_xgo_serial(SerialPin.P14, SerialPin.P13)
 
     radio.onReceivedNumber(function (receivedNumber: number) {
-        basic.showNumber(receivedNumber)
         if (WAIT) basic.pause(WAIT)
         WAIT = 0
         switch (receivedNumber) {
@@ -176,7 +175,6 @@ namespace CBurgXGo {
         while (!input.buttonIsPressed(Button.A));
         basic.clearScreen()
         radio.sendNumber(Message.Start)
-        basic.showNumber(Message.Start)
     }
 
     //% block="do a %wave wave"
@@ -185,15 +183,12 @@ namespace CBurgXGo {
         switch (wave) {
             case Wave.Slow:
                 if (MASTER) radio.sendNumber(Message.SlowWave)
-                basic.showNumber(Message.SlowWave)
                 break;
             case Wave.Normal:
                 if (MASTER) radio.sendNumber(Message.NormalWave)
-                basic.showNumber(Message.NormalWave)
                 break;
             case Wave.Fast:
                 if (MASTER) radio.sendNumber(Message.FastWave)
-                basic.showNumber(Message.FastWave)
                 break;
         }
     }
@@ -204,37 +199,30 @@ namespace CBurgXGo {
         switch (movement) {
             case Movement.Swing:
                 if (MASTER) radio.sendNumber(Message.Swing)
-                basic.showNumber(Message.Swing)
                 xgo.execution_action(xgo.action_enum.Play_pendulum)
                 break;
             case Movement.Wave:
                 if (MASTER) radio.sendNumber(Message.Wave)
-                basic.showNumber(Message.Wave)
                 xgo.execution_action(xgo.action_enum.Wave)
                 break;
             case Movement.Roll:
                 if (MASTER) radio.sendNumber(Message.Roll)
-                basic.showNumber(Message.Roll)
                 xgo.execution_action(xgo.action_enum.Twirl_Roll)
                 break;
             case Movement.Whirl:
                 if (MASTER) radio.sendNumber(Message.Whirl)
-                basic.showNumber(Message.Whirl)
                 xgo.execution_action(xgo.action_enum.Whirl)
                 break;
             case Movement.Crawl:
                 if (MASTER) radio.sendNumber(Message.Crawl)
-                basic.showNumber(Message.Crawl)
                 xgo.execution_action(xgo.action_enum.Crawl_forward)
                 break;
             case Movement.Stretch:
                 if (MASTER) radio.sendNumber(Message.Stretch)
-                basic.showNumber(Message.Stretch)
                 xgo.execution_action(xgo.action_enum.Stretch_oneself)
                 break;
             case Movement.Squat:
                 if (MASTER) radio.sendNumber(Message.Squat)
-                basic.showNumber(Message.Squat)
                 xgo.execution_action(xgo.action_enum.Squat)
                 break;
         }
@@ -244,7 +232,6 @@ namespace CBurgXGo {
     //% block.loc.nl="plas"
     export function pee() {
         if (MASTER) radio.sendNumber(Message.Pee)
-        basic.showNumber(Message.Pee)
         xgo.execution_action(xgo.action_enum.Pee)
     }
 
@@ -252,7 +239,6 @@ namespace CBurgXGo {
     //% block.loc.nl="zit"
     export function sitDown() {
         if (MASTER) radio.sendNumber(Message.Sit)
-        basic.showNumber(Message.Sit)
         xgo.execution_action(xgo.action_enum.Sit_down)
     }
 
@@ -260,7 +246,6 @@ namespace CBurgXGo {
     //% block.loc.nl="ga liggen"
     export function goProne() {
         if (MASTER) radio.sendNumber(Message.Prone)
-        basic.showNumber(Message.Prone)
         xgo.execution_action(xgo.action_enum.Go_prone)
     }
 
@@ -268,7 +253,6 @@ namespace CBurgXGo {
     //% block.loc.nl="sta rechtop"
     export function defaultPosture() {
         if (MASTER) radio.sendNumber(Message.Stand)
-        basic.showNumber(Message.Stand)
         xgo.execution_action(xgo.action_enum.Default_posture)
     }
 }
